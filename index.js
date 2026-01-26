@@ -6,6 +6,7 @@ const axios = require('axios');
 // Configuration
 const API_TOKEN = process.env.SHORTCUT_API_TOKEN;
 const DAYS_BACK = parseInt(process.env.DAYS_BACK || '7', 10);
+const PAGE_SIZE = parseInt(process.env.PAGE_SIZE || '25', 10);
 const WORKFLOW_STATE_IDS = process.env.WORKFLOW_STATE_IDS 
   ? process.env.WORKFLOW_STATE_IDS.split(',').map(id => id.trim()) 
   : [];
@@ -39,12 +40,12 @@ function createApiClient() {
 }
 
 /**
- * Get the date N days ago
+ * Get the date N days ago in ISO format
  */
 function getDateDaysAgo(days) {
   const date = new Date();
   date.setDate(date.getDate() - days);
-  return date.toISOString();
+  return date.toISOString().substring(0, 10);
 }
 
 /**
@@ -55,7 +56,7 @@ async function fetchStories(client) {
     const cutoffDate = getDateDaysAgo(DAYS_BACK);
     
     // Build search query
-    let query = `updated:>${cutoffDate.split('T')[0]}`;
+    let query = `updated:>${cutoffDate}`;
     
     if (WORKFLOW_STATE_IDS.length > 0) {
       const stateQuery = WORKFLOW_STATE_IDS.map(id => `state:${id}`).join(' OR ');
@@ -67,7 +68,7 @@ async function fetchStories(client) {
 
     const response = await client.post('/search/stories', {
       query: query,
-      page_size: 25
+      page_size: PAGE_SIZE
     });
 
     return response.data;
