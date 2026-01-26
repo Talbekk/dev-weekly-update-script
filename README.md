@@ -52,6 +52,7 @@ A simple Node.js script that communicates with the Shortcut API to fetch and dis
 ### Optional Environment Variables
 
 - `DAYS_BACK`: Number of days to look back for updated stories (default: 7)
+- `PAGE_SIZE`: Number of results per page (default: 25, max: 100)
 - `WORKFLOW_STATE_IDS`: Comma-separated list of workflow state IDs to filter by (leave empty to fetch all states)
 
 ### Getting Your API Token
