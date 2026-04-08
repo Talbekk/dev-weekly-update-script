@@ -43,9 +43,10 @@ async function main() {
 
   try {
     const range = getPreviousWeekRange();
-    // const epics = await fetchEpics(client, range);
+    console.log(`📅 Fetching data for the week: ${range.start.toDateString()} - ${range.end.toDateString()}\n`);
+    const epics = await fetchEpics(client, range);
     const stories = await fetchStories(client, range);
-    // displayEpics(epics);
+    displayEpics(epics);
 
     console.log("✅ Report generated successfully!\n");
   } catch (error) {
