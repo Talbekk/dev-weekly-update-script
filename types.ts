@@ -23,3 +23,34 @@ export interface Story {
   epic_id: number | null;
   [key: string]: unknown;
 }
+
+interface DisplayIcon {
+    created_at: string;
+    entity_type: string;
+    id: string;
+    updated_at: string;
+    url: string;
+}
+
+export interface Group {
+  id: string;
+  app_url: string;
+  archived: boolean;
+  color: string | null;
+  color_key: string;
+  created_at: string;
+  default_workflow_id: number;
+  description: string;
+  display_icon: DisplayIcon;
+  entity_type: string;
+  global_id: string;
+  member_ids: string[];
+  mention_name: string;
+  name: string;
+  num_epics_started: number;
+  num_stories: number;
+  num_stories_backlog: number;
+  num_stories_started: number;
+  updated_at: string;
+  workflow_ids: number[];
+}

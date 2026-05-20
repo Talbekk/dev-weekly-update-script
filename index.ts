@@ -6,6 +6,7 @@ import { fetchEpics } from "./epics/fetchEpics/index";
 import { displayEpics } from "./epics/displayEpics/index";
 import { fetchStories } from "./stories/fetchStories/index";
 import dotenv from "dotenv";
+import { fetchGroups } from "./groups/fetchGroups";
 dotenv.config();
 
 const API_TOKEN = process.env.SHORTCUT_API_TOKEN;
@@ -27,11 +28,14 @@ async function main(): Promise<void> {
   const client = createApiClient();
 
   try {
-    const range = getPreviousWeekRange();
-    console.log(`📅 Fetching data for the week: ${range.start.toDateString()} - ${range.end.toDateString()}\n`);
-    const epics = await fetchEpics(client, range);
-    await fetchStories(client, range);
-    displayEpics(epics);
+    const groups = await fetchGroups(client);
+    console.log("\n📋 Groups:");
+    console.log(groups);
+    // const range = getPreviousWeekRange();
+    // console.log(`📅 Fetching data for the week: ${range.start.toDateString()} - ${range.end.toDateString()}\n`);
+    // const epics = await fetchEpics(client, range);
+    // await fetchStories(client, range);
+    // displayEpics(epics);
 
     console.log("✅ Report generated successfully!\n");
   } catch (error) {
