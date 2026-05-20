@@ -1,13 +1,14 @@
 import { isAxiosError } from "axios";
 import type { ApiClient, DateRange, Story } from "../../types";
+import { groups } from "../../data/groups";
 
-export const fetchStories = async (client: ApiClient, range: DateRange): Promise<Story[]> => {
+export const fetchCompletedStories = async (client: ApiClient, range: DateRange): Promise<Story[]> => {
   try {
     const { start, end } = range;
     const response = await client.post<Story[]>("/stories/search", {
       completed_at_start: start.toISOString(),
       completed_at_end: end.toISOString(),
-      group_id: "64e3707d-6c9d-4786-aa8d-ff2b891c8def",
+      group_ids: [groups[0].id, groups[1].id],
     });
     console.log("🔍 Searching for stories...");
     console.log(`✅ Fetched ${response.data.length} stories from Shortcut API.`);

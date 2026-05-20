@@ -14,6 +14,22 @@ A simple Node.js script that communicates with the Shortcut API to fetch and dis
   - Last update timestamp
   - Direct link to story
 
+## Completed Steps
+
+- Add number for **Points Cleared** 
+- Add number for **Stories Cleared**
+- Add number for **Epics Completed**
+- Add number for **Epic Points Cleared**
+- Add number for **Epic Stories Cleared** 
+
+## Todo Steps
+
+- Add number for **AI Completed Stories** with the AI tag
+- Add number for **Active Epics**
+- Add number for **Bug Count**
+- Add number for **Highest Priority Bugs**
+- Add number for **Medium Highest Priority Bugs**
+
 ## Prerequisites
 
 - Node.js (version 12 or higher)

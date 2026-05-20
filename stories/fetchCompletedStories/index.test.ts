@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { fetchStories } from "./index";
+import { fetchCompletedStories } from "./index";
 import { mockStories } from "../../mocks/shortcut";
 import type { ApiClient, DateRange } from "../../types";
 
@@ -15,10 +15,10 @@ beforeEach(() => {
   vi.spyOn(console, "log").mockImplementation(() => {});
 });
 
-describe("fetchStories", () => {
+describe("fetchCompletedStories", () => {
   it("calls POST /stories/search with the correct body", async () => {
     const client = makeMockClient(mockStories);
-    await fetchStories(client, range);
+    await fetchCompletedStories(client, range);
 
     expect(client.post).toHaveBeenCalledWith("/stories/search", {
       completed_at_start: range.start.toISOString(),
@@ -29,33 +29,33 @@ describe("fetchStories", () => {
 
   it("returns the full list of stories from the API response", async () => {
     const client = makeMockClient(mockStories);
-    const result = await fetchStories(client, range);
+    const result = await fetchCompletedStories(client, range);
     expect(result).toHaveLength(mockStories.length);
   });
 
   it("returns an empty array when the API returns no stories", async () => {
     const client = makeMockClient([]);
-    const result = await fetchStories(client, range);
+    const result = await fetchCompletedStories(client, range);
     expect(result).toHaveLength(0);
   });
 
   it("correctly identifies bugs in the story set", async () => {
     const client = makeMockClient(mockStories);
-    const result = await fetchStories(client, range);
+    const result = await fetchCompletedStories(client, range);
     const bugs = result.filter((s) => s.story_type === "bug");
     expect(bugs).toHaveLength(2); // IDs 103 and 106
   });
 
   it("correctly identifies stories linked to epics", async () => {
     const client = makeMockClient(mockStories);
-    const result = await fetchStories(client, range);
+    const result = await fetchCompletedStories(client, range);
     const epicStories = result.filter((s) => s.epic_id !== null);
     expect(epicStories).toHaveLength(5); // all except ID 103
   });
 
   it("handles stories with null estimates without throwing", async () => {
     const client = makeMockClient(mockStories);
-    const result = await fetchStories(client, range);
+    const result = await fetchCompletedStories(client, range);
     const total = result.reduce((sum, s) => sum + (s.estimate ?? 0), 0);
     // 2 + 3 + 1 + 5 + 0 + 2 = 13
     expect(total).toBe(13);
@@ -72,6 +72,6 @@ describe("fetchStories", () => {
     } as unknown as ApiClient;
 
     vi.spyOn(console, "error").mockImplementation(() => {});
-    await expect(fetchStories(client, range)).rejects.toThrow("Network Error");
+    await expect(fetchCompletedStories(client, range)).rejects.toThrow("Network Error");
   });
 });
