@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { getPreviousWeekRange } from "./helpers/getPreviousWeekDateRange/index";
-import { createApiClient } from "./api/index";
-import { fetchEpics } from "./epics/fetchEpics/index";
-import { displayEpics } from "./epics/displayEpics/index";
-import { fetchStories } from "./stories/fetchStories/index";
+import { getPreviousWeekRange } from "./helpers/getPreviousWeekDateRange";
+import { createApiClient } from "./api";
+import { fetchEpics } from "./epics/fetchEpics";
+import { displayEpics } from "./epics/displayEpics";
+import { fetchCompletedStories } from "./stories/fetchCompletedStories";
 import dotenv from "dotenv";
 import { fetchGroups } from "./groups/fetchGroups";
 dotenv.config();
@@ -29,12 +29,12 @@ async function main(): Promise<void> {
 
   try {
     const groups = await fetchGroups(client);
-    console.log("\n📋 Groups:");
+    // console.log("\n📋 Groups:");
     console.log(groups);
-    // const range = getPreviousWeekRange();
-    // console.log(`📅 Fetching data for the week: ${range.start.toDateString()} - ${range.end.toDateString()}\n`);
+    const range = getPreviousWeekRange();
+    console.log(`📅 Fetching data for the week: ${range.start.toDateString()} - ${range.end.toDateString()}\n`);
     // const epics = await fetchEpics(client, range);
-    // await fetchStories(client, range);
+    await fetchCompletedStories(client, range);
     // displayEpics(epics);
 
     console.log("✅ Report generated successfully!\n");
@@ -44,4 +44,4 @@ async function main(): Promise<void> {
   }
 }
 
-main();
+main(); 

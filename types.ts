@@ -21,7 +21,7 @@ export interface Story {
   estimate: number | null;
   story_type: "feature" | "bug" | "chore";
   epic_id: number | null;
-  [key: string]: unknown;
+  labels: any[];
 }
 
 interface DisplayIcon {
