@@ -7,6 +7,7 @@ import { displayEpics } from "./epics/displayEpics";
 import { fetchCompletedStories } from "./stories/fetchCompletedStories";
 import dotenv from "dotenv";
 import { fetchGroups } from "./groups/fetchGroups";
+import { fetchWorkflows } from "./workflows/getWorkflows";
 dotenv.config();
 
 const API_TOKEN = process.env.SHORTCUT_API_TOKEN;
@@ -30,12 +31,23 @@ async function main(): Promise<void> {
   try {
     const groups = await fetchGroups(client);
     // console.log("\n📋 Groups:");
-    console.log(groups);
+    // console.log(groups);
     const range = getPreviousWeekRange();
+    // const workflows = await fetchWorkflows(client);
+    // console.log("\n📋 Workflows:");
+    // console.log(workflows);
+    // workflows.forEach((workflow) => {
+    //   console.log(`- ${workflow.name} (ID: ${workflow.id})`);
+    //   workflow.states.forEach((state) => {
+    //     console.log('state', state);
+    //   });
+    // });
     console.log(`📅 Fetching data for the week: ${range.start.toDateString()} - ${range.end.toDateString()}\n`);
-    // const epics = await fetchEpics(client, range);
-    await fetchCompletedStories(client, range);
-    // displayEpics(epics);
+    const epics = await fetchEpics(client, range);
+    // await fetchCompletedStories(client, range);
+    displayEpics(epics);
+    const activeEpics = epics.filter((epic) => epic.epic_state_id === 500000006 && !epic.completed);
+    console.log('activeEpics', activeEpics);
 
     console.log("✅ Report generated successfully!\n");
   } catch (error) {

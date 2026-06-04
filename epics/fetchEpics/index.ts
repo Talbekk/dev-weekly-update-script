@@ -12,7 +12,7 @@ export const fetchEpics = async (client: ApiClient, range: DateRange): Promise<E
     });
     console.log("🔍 Searching for epics...");
     console.log(`✅ Fetched ${response.data.length} epics from Shortcut API.`);
-    return completedEpics;
+    return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
       if (error.response) {

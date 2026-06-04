@@ -54,3 +54,32 @@ export interface Group {
   updated_at: string;
   workflow_ids: number[];
 }
+
+export interface Workflow {
+    id: number;
+    auto_assign_owner: boolean;
+    created_at: string;
+    default_state_id: number;
+    description: string;
+    entity_type: string;
+    name: string;
+    project_ids: number[];
+    states: WorkflowState[];
+    team_id: number;
+    updated_at: string;
+}
+
+export interface WorkflowState {
+    color: string;
+    created_at: string;
+    description: string;
+    entity_type: string;
+    id: number;
+    name: string;
+    num_stories: number;
+    num_story_templates: number;
+    position: number;
+    type: string;
+    updated_at: string;
+    verb: string;
+}
