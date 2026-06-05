@@ -30,7 +30,7 @@ async function main(): Promise<void> {
 
   try {
     const groups = await fetchGroups(client);
-    // console.log("\n📋 Groups:");
+    console.log("\n📋 Groups:");
     // console.log(groups);
     const range = getPreviousWeekRange();
     // const workflows = await fetchWorkflows(client);
@@ -45,9 +45,13 @@ async function main(): Promise<void> {
     console.log(`📅 Fetching data for the week: ${range.start.toDateString()} - ${range.end.toDateString()}\n`);
     const epics = await fetchEpics(client, range);
     // await fetchCompletedStories(client, range);
-    displayEpics(epics);
-    const activeEpics = epics.filter((epic) => epic.epic_state_id === 500000006 && !epic.completed);
+    // displayEpics(epics);
+    const activeEpics = epics.filter((epic) => !epic.completed && !epic.archived && epic.started && epic.owner_ids.length > 0 && epic.group_ids.includes('60e2d6c1-07bf-4df8-aa8e-6d32de0cb05a') && epic.planned_start_date);
     console.log('activeEpics', activeEpics);
+    console.log(`\n📊 Total active epics: ${activeEpics.length}`);
+    activeEpics.forEach((epic) => {
+      console.log(`- ${epic.name}`);
+    });
 
     console.log("✅ Report generated successfully!\n");
   } catch (error) {
