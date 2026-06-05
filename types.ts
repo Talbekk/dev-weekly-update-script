@@ -9,10 +9,59 @@ export interface DateRange {
 
 export interface Epic {
   id: number;
-  name: string;
+  app_url: string;
+  archived: boolean
+  associated_groups: any[];
   completed: boolean;
   completed_at: string | null;
-  [key: string]: unknown;
+  completed_at_override: string | null;
+  created_at: string;
+  deadline: string | null;
+  description: string;
+  entity_type: string;
+  epic_state_id: number;
+  external_id: string | null;
+  follower_ids: string[];
+  group_id: string | null;
+  group_ids: string[];
+  group_mention_ids: string[];
+  label_ids: number[];
+  labels: any[];
+  member_mention_ids: string[];
+  mention_ids: string[];
+  milestone_id: number | null;
+  name: string;
+  objective_ids: number[];
+  owner_ids: string[];
+  planned_start_date: string | null;
+  position: number;
+  productboard_id: string | null;
+  productboard_name: string | null;
+  productboard_plugin_id: string | null;
+  productboard_url: string | null;
+  project_ids: number[];
+  requested_by_id: string | null;
+  started: boolean;
+  started_at: string | null;
+  started_at_override: string | null;
+  state: string;
+  stats: {
+    last_story_update: string | null;
+    num_points: number;
+    num_points_backlog: number;
+    num_points_done: number;
+    num_points_started: number;
+    num_points_unstarted: number;
+    num_related_documents: number;
+    num_stories_backlog: number;
+    num_stories_done: number;
+    num_stories_started: number;
+    num_stories_total: number;
+    num_stories_unestimated: number;
+    num_stories_unstarted: number;
+  };
+  stories_without_projects: number;
+  updated_at: string;
 }
 
 export interface Story {
