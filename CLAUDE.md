@@ -34,20 +34,26 @@ This is a CLI script that queries the [Shortcut](https://shortcut.com) project m
 **API client:** `api/index.ts` creates an axios instance pointed at `https://api.app.shortcut.com/api/v3` with the `Shortcut-Token` header. All feature modules receive this client as a parameter rather than importing it directly.
 
 **Feature modules** follow a consistent pattern at `<domain>/fetch<Domain>/index.ts`:
+- `api/index.ts` — creates the axios client (`createApiClient`); all feature modules receive it as a parameter
 - `groups/fetchGroups` — fetches all Shortcut groups via `GET /groups`
-- `epics/fetchEpics` — fetches all epics via `GET /epics`, then filters to those completed within the date range
-- `stories/fetchCompletedStories` — searches completed stories via `POST /stories/search` with a date range, computes metrics (points, bugs, epic-linked stories)
+- `epics/fetchEpics` — fetches all epics via `GET /epics`, filters to those completed within the date range
 - `epics/displayEpics` — formats and prints epic data to stdout
+- `stories/fetchCompletedStories` — searches completed stories via `POST /stories/search` with a date range and group IDs, computes metrics (points, bugs, AI-labelled stories, epic-linked stories)
+- `workflows/getWorkflows` — fetches all workflows via `GET /workflows`
 
-**Hardcoded group data:** `data/groups/index.ts` contains static group objects (Product and Development teams) with real Shortcut UUIDs. `fetchCompletedStories` uses these IDs to filter stories to just those two teams.
+**Active epic filtering:** `index.ts` filters epics to those that are not completed, not archived, started, have at least one owner, and belong to the Development group (`group_ids` includes the Development UUID).
+
+**Hardcoded group data:** `data/groups/index.ts` contains static `Group` objects (Product and Development teams) with real Shortcut UUIDs. `fetchCompletedStories` sends both group IDs in the `group_ids` search param to limit results to those two teams.
 
 **Date range helper:** `helpers/getPreviousWeekDateRange` returns the Monday–Sunday range for the previous calendar week.
 
-**Types:** `types.ts` defines `ApiClient`, `DateRange`, `Epic`, `Story`, and `Group`. Note: the `Story` type is incomplete — `mocks/shortcut.ts` includes additional fields (`completed`, `completed_at`, `label_names`, etc.) that aren't yet in the type definition.
+**Types:** `types.ts` defines `ApiClient`, `DateRange`, `Epic`, `Story`, `Group`, `Workflow`, and `WorkflowState`.
 
-**Tests:** Each feature module has a co-located `index.test.ts` using Vitest. The pattern is to create a mock client with `vi.fn()` and pass in data from `mocks/shortcut.ts`.
-
-Use Vitest for unit tests. Place mock data (e.g., Shortcut API responses) in dedicated mock files and keep tests organized per module.
+**Tests:** Every module has a co-located `index.test.ts` using Vitest. The standard pattern:
+- Create a mock client with `vi.fn()` (e.g. `{ get: vi.fn().mockResolvedValue({ data }) }`)
+- Pass in fixture data from `mocks/shortcut.ts` (`mockEpics`, `mockStories`, `mockGroups`, `mockWorkflows`)
+- For `api/index.ts`, mock axios itself with `vi.mock("axios", ...)`
+- Silence `console.log` in `beforeEach` with `vi.spyOn(console, "log").mockImplementation(() => {})`
 
 ## Planned Features (from README)
 
