@@ -1,7 +1,57 @@
-import type { Epic, Story } from "../types";
+import type { Epic, Story, Workflow } from "../types";
+
+const epicDefaults: Omit<Epic, "id" | "name" | "completed" | "completed_at" | "state" | "created_at" | "updated_at" | "description"> = {
+  app_url: "https://app.shortcut.com/workspace/epic/1",
+  archived: false,
+  associated_groups: [],
+  completed_at_override: null,
+  deadline: null,
+  entity_type: "epic",
+  epic_state_id: 500000001,
+  external_id: null,
+  follower_ids: [],
+  group_id: null,
+  group_ids: [],
+  group_mention_ids: [],
+  label_ids: [],
+  labels: [],
+  member_mention_ids: [],
+  mention_ids: [],
+  milestone_id: null,
+  objective_ids: [],
+  owner_ids: [],
+  planned_start_date: null,
+  position: 0,
+  productboard_id: null,
+  productboard_name: null,
+  productboard_plugin_id: null,
+  productboard_url: null,
+  project_ids: [],
+  requested_by_id: null,
+  started: false,
+  started_at: null,
+  started_at_override: null,
+  stats: {
+    last_story_update: null,
+    num_points: 0,
+    num_points_backlog: 0,
+    num_points_done: 0,
+    num_points_started: 0,
+    num_points_unstarted: 0,
+    num_related_documents: 0,
+    num_stories_backlog: 0,
+    num_stories_done: 0,
+    num_stories_started: 0,
+    num_stories_total: 0,
+    num_stories_unestimated: 0,
+    num_stories_unstarted: 0,
+  },
+  stories_without_projects: 0,
+};
 
 export const mockEpics: Epic[] = [
   {
+    ...epicDefaults,
     id: 1,
     name: "Redesign Onboarding Flow",
     completed: true,
@@ -12,6 +62,7 @@ export const mockEpics: Epic[] = [
     description: "Full redesign of the user onboarding experience.",
   },
   {
+    ...epicDefaults,
     id: 2,
     name: "API Rate Limiting",
     completed: true,
@@ -22,6 +73,7 @@ export const mockEpics: Epic[] = [
     description: "Implement rate limiting across all public API endpoints.",
   },
   {
+    ...epicDefaults,
     id: 3,
     name: "Legacy Auth Cleanup",
     completed: true,
@@ -32,6 +84,7 @@ export const mockEpics: Epic[] = [
     description: "Remove old session-based auth in favour of JWT.",
   },
   {
+    ...epicDefaults,
     id: 4,
     name: "Mobile Push Notifications",
     completed: false,
@@ -50,6 +103,7 @@ export const mockStories: Story[] = [
     estimate: 2,
     story_type: "feature",
     epic_id: 1,
+    labels: [],
     completed: true,
     completed_at: "2026-05-05T16:00:00.000Z",
     created_at: "2026-04-28T09:00:00.000Z",
@@ -61,6 +115,7 @@ export const mockStories: Story[] = [
     estimate: 3,
     story_type: "feature",
     epic_id: 1,
+    labels: [],
     completed: true,
     completed_at: "2026-05-06T10:00:00.000Z",
     created_at: "2026-04-29T09:00:00.000Z",
@@ -72,6 +127,7 @@ export const mockStories: Story[] = [
     estimate: 1,
     story_type: "bug",
     epic_id: null,
+    labels: [],
     completed: true,
     completed_at: "2026-05-07T13:00:00.000Z",
     created_at: "2026-05-06T09:00:00.000Z",
@@ -83,6 +139,7 @@ export const mockStories: Story[] = [
     estimate: 5,
     story_type: "feature",
     epic_id: 2,
+    labels: [],
     completed: true,
     completed_at: "2026-05-07T17:00:00.000Z",
     created_at: "2026-04-20T09:00:00.000Z",
@@ -94,6 +151,7 @@ export const mockStories: Story[] = [
     estimate: null,
     story_type: "chore",
     epic_id: 2,
+    labels: [],
     completed: true,
     completed_at: "2026-05-08T09:00:00.000Z",
     created_at: "2026-04-22T09:00:00.000Z",
@@ -105,6 +163,7 @@ export const mockStories: Story[] = [
     estimate: 2,
     story_type: "bug",
     epic_id: 2,
+    labels: [],
     completed: true,
     completed_at: "2026-05-08T11:00:00.000Z",
     created_at: "2026-05-07T14:00:00.000Z",
@@ -112,7 +171,7 @@ export const mockStories: Story[] = [
   },
 ];
 
-export const mockWorkflows = [
+export const mockWorkflows: Workflow[] = [
   {
     id: 501,
     auto_assign_owner: false,

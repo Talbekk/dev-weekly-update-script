@@ -32,8 +32,7 @@ describe("fetchEpics", () => {
   });
 
   it("returns an empty array when no epics fall in range", async () => {
-    const emptyRangeResult = mockEpics.filter(() => false);
-    const client = makeMockClient(emptyRangeResult);
+    const client = makeMockClient(mockEpics);
     const result = await fetchEpics(client, {
       start: new Date("2020-01-01"),
       end: new Date("2020-01-07"),

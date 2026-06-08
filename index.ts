@@ -1,13 +1,11 @@
 #!/usr/bin/env node
 
 import { getPreviousWeekRange } from "./helpers/getPreviousWeekDateRange";
+import { filterActiveEpics } from "./helpers/filterActiveEpics";
 import { createApiClient } from "./api";
 import { fetchEpics } from "./epics/fetchEpics";
-import { displayEpics } from "./epics/displayEpics";
-import { fetchCompletedStories } from "./stories/fetchCompletedStories";
 import dotenv from "dotenv";
-import { fetchGroups } from "./groups/fetchGroups";
-import { fetchWorkflows } from "./workflows/getWorkflows";
+import { groups } from "./data/groups";
 dotenv.config();
 
 const API_TOKEN = process.env.SHORTCUT_API_TOKEN;
@@ -29,25 +27,15 @@ async function main(): Promise<void> {
   const client = createApiClient();
 
   try {
-    const groups = await fetchGroups(client);
-    console.log("\n📋 Groups:");
-    // console.log(groups);
     const range = getPreviousWeekRange();
-    // const workflows = await fetchWorkflows(client);
-    // console.log("\n📋 Workflows:");
-    // console.log(workflows);
-    // workflows.forEach((workflow) => {
-    //   console.log(`- ${workflow.name} (ID: ${workflow.id})`);
-    //   workflow.states.forEach((state) => {
-    //     console.log('state', state);
-    //   });
-    // });
     console.log(`📅 Fetching data for the week: ${range.start.toDateString()} - ${range.end.toDateString()}\n`);
+
+    const devGroup = groups.find((g) => g.mention_name === "dev");
+    if (!devGroup) throw new Error("Development group not found in static data");
+
     const epics = await fetchEpics(client, range);
-    // await fetchCompletedStories(client, range);
-    // displayEpics(epics);
-    const activeEpics = epics.filter((epic) => !epic.completed && !epic.archived && epic.started && epic.owner_ids.length > 0 && epic.group_ids.includes('60e2d6c1-07bf-4df8-aa8e-6d32de0cb05a'));
-    console.log('activeEpics', activeEpics);
+    const activeEpics = filterActiveEpics(epics, devGroup.id);
+
     console.log(`\n📊 Total active epics: ${activeEpics.length}`);
     activeEpics.forEach((epic) => {
       console.log(`- ${epic.name}`);

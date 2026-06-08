@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import axios from "axios";
+import axios, { type AxiosInstance } from "axios";
 import { createApiClient } from ".";
 
 vi.mock("axios", () => ({
@@ -53,7 +53,7 @@ describe("createApiClient", () => {
 
   it("returns the axios instance", () => {
     const fakeInstance = { get: vi.fn() };
-    vi.mocked(axios.create).mockReturnValueOnce(fakeInstance as any);
+    vi.mocked(axios.create).mockReturnValueOnce(fakeInstance as unknown as AxiosInstance);
     const client = createApiClient();
     expect(client).toBe(fakeInstance);
   });

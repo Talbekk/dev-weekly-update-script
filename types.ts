@@ -11,7 +11,7 @@ export interface Epic {
   id: number;
   app_url: string;
   archived: boolean
-  associated_groups: any[];
+  associated_groups: { id: string; associated_group_id: string; role: string }[];
   completed: boolean;
   completed_at: string | null;
   completed_at_override: string | null;
@@ -26,7 +26,7 @@ export interface Epic {
   group_ids: string[];
   group_mention_ids: string[];
   label_ids: number[];
-  labels: any[];
+  labels: { id: number; name: string }[];
   member_mention_ids: string[];
   mention_ids: string[];
   milestone_id: number | null;
@@ -70,7 +70,11 @@ export interface Story {
   estimate: number | null;
   story_type: "feature" | "bug" | "chore";
   epic_id: number | null;
-  labels: any[];
+  labels: { id: number; name: string }[];
+  completed: boolean;
+  completed_at: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 interface DisplayIcon {
