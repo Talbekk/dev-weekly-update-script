@@ -1,0 +1,1 @@
+Generate Vitest unit tests with mock data for the specified module, matching existing test patterns.

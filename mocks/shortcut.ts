@@ -112,6 +112,50 @@ export const mockStories: Story[] = [
   },
 ];
 
+export const mockWorkflows = [
+  {
+    id: 501,
+    auto_assign_owner: false,
+    created_at: "2026-01-01T00:00:00.000Z",
+    default_state_id: 601,
+    description: "Main engineering workflow",
+    entity_type: "workflow",
+    name: "Engineering",
+    project_ids: [1, 2],
+    states: [
+      {
+        color: "#ff0000",
+        created_at: "2026-01-01T00:00:00.000Z",
+        description: "Ready to start",
+        entity_type: "workflow-state",
+        id: 601,
+        name: "Backlog",
+        num_stories: 5,
+        num_story_templates: 0,
+        position: 0,
+        type: "backlog",
+        updated_at: "2026-01-01T00:00:00.000Z",
+        verb: "backlog",
+      },
+    ],
+    team_id: 1,
+    updated_at: "2026-05-01T00:00:00.000Z",
+  },
+  {
+    id: 502,
+    auto_assign_owner: true,
+    created_at: "2026-02-01T00:00:00.000Z",
+    default_state_id: 602,
+    description: "Design workflow",
+    entity_type: "workflow",
+    name: "Design",
+    project_ids: [3],
+    states: [],
+    team_id: 2,
+    updated_at: "2026-05-02T00:00:00.000Z",
+  },
+];
+
 export const mockGroups = [
   {
     id: 1,

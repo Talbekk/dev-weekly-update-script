@@ -23,7 +23,7 @@ describe("fetchCompletedStories", () => {
     expect(client.post).toHaveBeenCalledWith("/stories/search", {
       completed_at_start: range.start.toISOString(),
       completed_at_end: range.end.toISOString(),
-      group_id: "64e3707d-6c9d-4786-aa8d-ff2b891c8def",
+      group_ids: ["64e3707d-6c9d-4786-aa8d-ff2b891c8def", "60e2d6c1-07bf-4df8-aa8e-6d32de0cb05a"],
     });
   });
 

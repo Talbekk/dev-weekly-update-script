@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Tech Stack
+
+Project uses TypeScript as the primary language; prefer typed implementations and keep JSON config consistent with existing patterns.
+
+
 ## Commands
 
 ```bash
@@ -41,6 +46,8 @@ This is a CLI script that queries the [Shortcut](https://shortcut.com) project m
 **Types:** `types.ts` defines `ApiClient`, `DateRange`, `Epic`, `Story`, and `Group`. Note: the `Story` type is incomplete — `mocks/shortcut.ts` includes additional fields (`completed`, `completed_at`, `label_names`, etc.) that aren't yet in the type definition.
 
 **Tests:** Each feature module has a co-located `index.test.ts` using Vitest. The pattern is to create a mock client with `vi.fn()` and pass in data from `mocks/shortcut.ts`.
+
+Use Vitest for unit tests. Place mock data (e.g., Shortcut API responses) in dedicated mock files and keep tests organized per module.
 
 ## Planned Features (from README)
 
