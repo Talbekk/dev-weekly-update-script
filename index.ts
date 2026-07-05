@@ -7,6 +7,9 @@ import { fetchEpics } from "./epics/fetchEpics";
 import dotenv from "dotenv";
 import { groups } from "./data/groups";
 import { getCompletedEpics } from "./helpers/getCompletedEpics";
+import { fetchCompletedStories } from "./stories/fetchCompletedStories";
+import { getCompletedStoryPoints } from "./helpers/getCompletedStoryPoints";
+import { getBugsCleared } from "./helpers/getBugsCleared";
 dotenv.config();
 
 const API_TOKEN = process.env.SHORTCUT_API_TOKEN;
@@ -37,11 +40,20 @@ async function main(): Promise<void> {
     const epics = await fetchEpics(client, range);
     const activeEpics = filterActiveEpics(epics, devGroup.id);
     const completedEpics = getCompletedEpics(epics, range);
+
     console.log(`\n📊 Total completed epics: ${completedEpics.length}`);
     console.log(`\n📊 Total active epics: ${activeEpics.length}`);
     activeEpics.forEach((epic) => {
       console.log(`- ${epic.name}`);
     });
+
+    const completedStories = await fetchCompletedStories(client, range);
+    const totalCompletedStoryPoints = getCompletedStoryPoints(completedStories);
+    const busgCleared = getBugsCleared(completedStories);
+
+    console.log(`\n📊 Total completed stories: ${completedStories.length}`);
+    console.log(`\n📊 Total completed story points: ${totalCompletedStoryPoints}`);
+    console.log(`\n📊 Total bugs cleared: ${busgCleared}`);
 
     console.log("✅ Report generated successfully!\n");
   } catch (error) {
