@@ -49,11 +49,11 @@ async function main(): Promise<void> {
 
     const completedStories = await fetchCompletedStories(client, range);
     const totalCompletedStoryPoints = getCompletedStoryPoints(completedStories);
-    const busgCleared = getBugsCleared(completedStories);
+    const bugsCleared = getBugsCleared(completedStories);
 
     console.log(`\n📊 Total completed stories: ${completedStories.length}`);
     console.log(`\n📊 Total completed story points: ${totalCompletedStoryPoints}`);
-    console.log(`\n📊 Total bugs cleared: ${busgCleared}`);
+    console.log(`\n📊 Total bugs cleared: ${bugsCleared}`);
 
     console.log("✅ Report generated successfully!\n");
   } catch (error) {
