@@ -6,6 +6,7 @@ import { createApiClient } from "./api";
 import { fetchEpics } from "./epics/fetchEpics";
 import dotenv from "dotenv";
 import { groups } from "./data/groups";
+import { getCompletedEpics } from "./helpers/getCompletedEpics";
 dotenv.config();
 
 const API_TOKEN = process.env.SHORTCUT_API_TOKEN;
@@ -35,7 +36,8 @@ async function main(): Promise<void> {
 
     const epics = await fetchEpics(client, range);
     const activeEpics = filterActiveEpics(epics, devGroup.id);
-
+    const completedEpics = getCompletedEpics(epics, range);
+    console.log(`\n📊 Total completed epics: ${completedEpics.length}`);
     console.log(`\n📊 Total active epics: ${activeEpics.length}`);
     activeEpics.forEach((epic) => {
       console.log(`- ${epic.name}`);

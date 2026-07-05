@@ -18,14 +18,14 @@ A simple Node.js script that communicates with the Shortcut API to fetch and dis
 
 - Add number for **Points Cleared** 
 - Add number for **Stories Cleared**
+- Add number for **Active Epics**
 - Add number for **Epics Completed**
-- Add number for **Epic Points Cleared**
-- Add number for **Epic Stories Cleared** 
-- Add number for **AI Completed Stories** with the AI tag
 
 ## Todo Steps
 
-- Add number for **Active Epics**
+- Add number for **Epic Points Cleared**
+- Add number for **Epic Stories Cleared** 
+- Add number for **AI Completed Stories** with the AI tag
 - Add number for **Bug Count**
 - Add number for **Highest Priority Bugs**
 - Add number for **Medium Highest Priority Bugs**
