@@ -1,4 +1,4 @@
-import type { Epic, Story, Workflow } from "../types";
+import type { CustomField, Epic, Story, Workflow } from "../types";
 
 const epicDefaults: Omit<Epic, "id" | "name" | "completed" | "completed_at" | "state" | "created_at" | "updated_at" | "description"> = {
   app_url: "https://app.shortcut.com/workspace/epic/1",
@@ -212,6 +212,42 @@ export const mockWorkflows: Workflow[] = [
     states: [],
     team_id: 2,
     updated_at: "2026-05-02T00:00:00.000Z",
+  },
+];
+
+export const mockCustomFields: CustomField[] = [
+  {
+    id: "field-1",
+    canonical_name: "priority",
+    created_at: "2026-01-10T09:00:00.000Z",
+    description: "Priority of the story.",
+    enabled: true,
+    entity_type: "custom-field",
+    field_type: "enum",
+    icon_set_identifier: "priority",
+    name: "Priority",
+    position: 0,
+    updated_at: "2026-01-10T09:00:00.000Z",
+    values: [
+      { id: "value-1", color_key: "red", entity_type: "custom-field-enum-value", position: 0, value: "High" },
+      { id: "value-2", color_key: "yellow", entity_type: "custom-field-enum-value", position: 1, value: "Medium" },
+    ],
+  },
+  {
+    id: "field-2",
+    canonical_name: "severity",
+    created_at: "2026-01-12T09:00:00.000Z",
+    description: "Severity of the bug.",
+    enabled: true,
+    entity_type: "custom-field",
+    field_type: "enum",
+    icon_set_identifier: "severity",
+    name: "Severity",
+    position: 1,
+    updated_at: "2026-01-12T09:00:00.000Z",
+    values: [
+      { id: "value-3", color_key: "orange", entity_type: "custom-field-enum-value", position: 0, value: "Critical" },
+    ],
   },
 ];
 
