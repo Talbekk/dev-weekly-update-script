@@ -136,3 +136,24 @@ export interface WorkflowState {
     updated_at: string;
     verb: string;
 }
+
+export interface CustomField {
+  canonical_name: string;
+  created_at: string;
+  description: string;
+  enabled: boolean;
+  entity_type: string;
+  field_type: string;
+  icon_set_identifier: string;
+  id: string;
+  name: string;
+  position: number;
+  updated_at: string;
+  values: {
+    color_key: string;
+    entity_type: string;
+    id: string;
+    position: number;
+    value: string;
+  }[];
+}
