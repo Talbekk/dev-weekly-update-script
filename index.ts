@@ -11,6 +11,8 @@ import { fetchCompletedStories } from "./stories/fetchCompletedStories";
 import { getCompletedStoryPoints } from "./stories/getCompletedStoryPoints";
 import { getBugsCleared } from "./stories/getBugsCleared";
 import { getStoriesCompletedByAI } from "./stories/getStoriesCompletedByAI";
+import { getEpicStoriesCompleted } from "./epics/getEpicStoriesCompleted";
+import { getEpicPointsCompleted } from "./epics/getEpicPointsCompleted";
 dotenv.config();
 
 const API_TOKEN = process.env.SHORTCUT_API_TOKEN;
@@ -54,14 +56,21 @@ async function main(): Promise<void> {
     const completedStories = await fetchCompletedStories(client, range);
     // const totalCompletedStoryPoints = getCompletedStoryPoints(completedStories);
     // const bugsCleared = getBugsCleared(completedStories);
-    const storiesCompletedByAI = getStoriesCompletedByAI(completedStories);
+    // const storiesCompletedByAI = getStoriesCompletedByAI(completedStories);
+    const epicStoriesCompleted = getEpicStoriesCompleted(completedStories);
+    const epicPointsCompleted = getEpicPointsCompleted(epicStoriesCompleted);
 
     console.log(`\n📊 Total completed stories: ${completedStories.length}`);
+    console.log(`\n📊 Total epic points completed: ${epicPointsCompleted}`);
     // console.log(`\n📊 Total completed story points: ${totalCompletedStoryPoints}`);
     // console.log(`\n📊 Total bugs cleared: ${bugsCleared}`);
-    console.log(`\n📊 Total stories completed by AI: ${storiesCompletedByAI.length}`);
-    storiesCompletedByAI.forEach((story) => {
-      console.log(story);
+    // console.log(`\n📊 Total stories completed by AI: ${storiesCompletedByAI.length}`);
+    // storiesCompletedByAI.forEach((story) => {
+    //   console.log(story);
+    // });
+    console.log(`\n📊 Total epic stories completed: ${epicStoriesCompleted.length}`);
+    epicStoriesCompleted.forEach((story) => {
+      console.log(story.completed_at, story.name, `(Epic ID: ${story.epic_id})`);
     });
 
     console.log("✅ Report generated successfully!\n");
