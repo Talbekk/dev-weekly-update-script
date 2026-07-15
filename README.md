@@ -23,10 +23,10 @@ A simple Node.js script that communicates with the Shortcut API to fetch and dis
 - Add number for **AI Completed Stories** with the AI tag
 - Add number for **Epic Points Cleared**
 - Add number for **Epic Stories Cleared**
+- Add number for **Bug Count**
 
 ## Todo Steps
 
-- Add number for **Bug Count**
 - Add number for **Highest Priority Bugs**
 - Add number for **Medium Highest Priority Bugs**
 
