@@ -5,7 +5,9 @@
       "Bash(npm test *)",
       "Bash(npm -v)",
       "Bash(perl -i -pe 's/^\\(    labels: \\\\[\\\\],\\)$/$1\\\\n    custom_fields: [],/ if $. >= 99 && $. <= 172' mocks/shortcut.ts)",
-      "Bash(npm start *)"
+      "Bash(npm start *)",
+      "Bash(xargs -I{} sh -c 'test -f \"{}\" && echo \"key file exists at: {}\" || echo \"MISSING: {}\"')",
+      "Bash(npm install *)"
     ]
   },
   "hooks": {
