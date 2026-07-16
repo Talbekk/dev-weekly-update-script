@@ -1,12 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { fetchEpics } from "./index";
 import { mockEpics } from "../../mocks/shortcut";
-import type { ApiClient, DateRange } from "../../types";
-
-const range: DateRange = {
-  start: new Date("2026-05-04T00:00:00.000Z"), // Mon
-  end: new Date("2026-05-10T23:59:59.999Z"),   // Sun
-};
+import type { ApiClient } from "../../types";
 
 const makeMockClient = (data: unknown) =>
   ({ get: vi.fn().mockResolvedValue({ data }) }) as unknown as ApiClient;
@@ -18,14 +13,14 @@ beforeEach(() => {
 describe("fetchEpics", () => {
   it("returns all epics from the API, unfiltered", async () => {
     const client = makeMockClient(mockEpics);
-    const result = await fetchEpics(client, range);
+    const result = await fetchEpics(client);
 
     expect(result).toEqual(mockEpics);
   });
 
   it("calls GET /epics", async () => {
     const client = makeMockClient(mockEpics);
-    await fetchEpics(client, range);
+    await fetchEpics(client);
     expect(client.get).toHaveBeenCalledWith("/epics");
   });
 
@@ -39,6 +34,6 @@ describe("fetchEpics", () => {
     } as unknown as ApiClient;
 
     vi.spyOn(console, "error").mockImplementation(() => {});
-    await expect(fetchEpics(client, range)).rejects.toThrow("Request failed");
+    await expect(fetchEpics(client)).rejects.toThrow("Request failed");
   });
 });

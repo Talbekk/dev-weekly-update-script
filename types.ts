@@ -142,6 +142,39 @@ export interface WorkflowState {
     verb: string;
 }
 
+export interface EpicSummary {
+  id: number;
+  name: string;
+}
+
+export interface StorySummary {
+  id: number;
+  name: string;
+  completedAt: string | null;
+  epicId: number | null;
+}
+
+export interface WeeklyReport {
+  range: {
+    start: string;
+    end: string;
+  };
+  storiesCompleted: number;
+  pointsCompleted: number;
+  bugsCleared: number;
+  aiStories: StorySummary[];
+  epicStoriesCompleted: number;
+  epicPointsCompleted: number;
+  epicStories: StorySummary[];
+  activeEpics: EpicSummary[];
+  completedEpics: EpicSummary[];
+  openBugs: {
+    total: number;
+    highestPriority: number;
+    highPriority: number;
+  };
+}
+
 export interface CustomField {
   canonical_name: string;
   created_at: string;

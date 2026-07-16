@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npx vitest *)",
       "Bash(npm test *)",
-      "Bash(npm -v)"
+      "Bash(npm -v)",
+      "Bash(perl -i -pe 's/^\\(    labels: \\\\[\\\\],\\)$/$1\\\\n    custom_fields: [],/ if $. >= 99 && $. <= 172' mocks/shortcut.ts)",
+      "Bash(npm start *)"
     ]
   },
   "hooks": {

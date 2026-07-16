@@ -1,5 +1,11 @@
 import { Group } from "../../types";
 
+const findGroup = (groups: Group[], mentionName: string): Group => {
+    const group = groups.find((g) => g.mention_name === mentionName);
+    if (!group) throw new Error(`Group with mention name "${mentionName}" not found in static data`);
+    return group;
+};
+
 export const groups: Array<Group> = [
     {
         app_url: 'https://app.shortcut.com/cauldron/team/64e3707d-6c9d-4786-aa8d-ff2b891c8def',
@@ -65,3 +71,6 @@ export const groups: Array<Group> = [
         created_at: '2021-07-05T09:54:09.629Z'
     },
 ]
+
+export const productGroup = findGroup(groups, "product");
+export const devGroup = findGroup(groups, "dev");

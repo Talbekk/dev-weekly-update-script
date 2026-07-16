@@ -1,23 +1,11 @@
-import { isAxiosError } from "axios";
-import type { ApiClient, DateRange, Epic } from "../../types";
+import type { ApiClient, Epic } from "../../types";
+import { handleApiError } from "../../helpers/handleApiError";
 
-export const fetchEpics = async (client: ApiClient, range: DateRange): Promise<Epic[]> => {
+export const fetchEpics = async (client: ApiClient): Promise<Epic[]> => {
   try {
     const response = await client.get<Epic[]>("/epics");
-    const { start, end } = range;
-    console.log("🔍 Searching for epics...");
-    console.log(`✅ Fetched ${response.data.length} epics from Shortcut API.`);
     return response.data;
   } catch (error) {
-    if (isAxiosError(error)) {
-      if (error.response) {
-        console.error("❌ API Error:", error.response.status, error.response.data);
-      } else if (error.request) {
-        console.error("❌ Network Error: No response received from Shortcut API");
-      }
-    } else if (error instanceof Error) {
-      console.error("❌ Error:", error.message);
-    }
-    throw error;
+    return handleApiError(error);
   }
 };
