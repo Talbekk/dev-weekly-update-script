@@ -75,6 +75,11 @@ export interface Story {
   completed_at: string | null;
   created_at: string;
   updated_at: string;
+  custom_fields: {
+    field_id: string;
+    value: string;
+    value_id: string;
+  }[];
 }
 
 interface DisplayIcon {
