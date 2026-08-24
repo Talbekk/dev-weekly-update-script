@@ -25,6 +25,7 @@ const report: WeeklyReport = {
     total: 47,
     highestPriority: 0,
     highPriority: 9,
+    support: 0,
   },
 };
 
@@ -79,6 +80,7 @@ describe("reportToMetrics", () => {
       "Total Bugs": 47,
       "Total Bugs - S": 0,
       "Total Bugs - A": 9,
+      "Total Bugs (Support)": 0,
       "Active Epics": 2,
     });
   });

@@ -33,4 +33,5 @@ export const displayReport = (report: WeeklyReport): void => {
   console.log(`\n📊 Total open bugs: ${report.openBugs.total}`);
   console.log(`📊 Highest priority bugs: ${report.openBugs.highestPriority}`);
   console.log(`📊 High priority bugs: ${report.openBugs.highPriority}`);
+  console.log(`📊 Support bugs: ${report.openBugs.support}`);
 };

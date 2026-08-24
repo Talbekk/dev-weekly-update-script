@@ -83,6 +83,7 @@ export interface Story {
     value: string;
     value_id: string;
   }[];
+  external_links: string[];
 }
 
 interface DisplayIcon {
@@ -175,6 +176,7 @@ export interface WeeklyReport {
     total: number;
     highestPriority: number;
     highPriority: number;
+    support: number;
   };
 }
 

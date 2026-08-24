@@ -19,6 +19,7 @@ export const reportToMetrics = (report: WeeklyReport): Record<string, number> =>
   "Total Bugs": report.openBugs.total,
   "Total Bugs - S": report.openBugs.highestPriority,
   "Total Bugs - A": report.openBugs.highPriority,
+  "Total Bugs (Support)": report.openBugs.support,
   "Active Epics": report.activeEpics.length,
 });
 

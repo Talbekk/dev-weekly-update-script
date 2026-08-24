@@ -1,4 +1,5 @@
 import type { ApiClient, DateRange, Epic, EpicSummary, Story, StorySummary, WeeklyReport } from "../../types";
+import { getSupportBugsCount } from "../../bugs/getSupportBugsCount";
 import { devGroup } from "../../data/groups";
 import { fetchEpics } from "../../epics/fetchEpics";
 import { fetchBugs } from "../../bugs/fetchBugs";
@@ -55,6 +56,7 @@ export const buildWeeklyReport = async (client: ApiClient, range: DateRange): Pr
       total: bugs.length,
       highestPriority: getPriorityBugsCount(bugsWithCustomFields, "Highest"),
       highPriority: getPriorityBugsCount(bugsWithCustomFields, "High"),
+      support: getSupportBugsCount(bugsWithCustomFields),
     },
   };
 };
