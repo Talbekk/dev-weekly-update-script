@@ -55,6 +55,8 @@ const labelColumn = [
   ["Total Bugs - A"],
   ["Total Bugs (Support)"],
   ["Active Epics"],
+  ["Chores Cleared"],
+  ["Chore Points Cleared"],
 ];
 
 const makeMockClient = () =>
@@ -86,6 +88,8 @@ describe("reportToMetrics", () => {
       "Total Bugs - A": 9,
       "Total Bugs (Support)": 0,
       "Active Epics": 2,
+      "Chores Cleared": 2,
+      "Chore Points Cleared": 5,
     });
   });
 });

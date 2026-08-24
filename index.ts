@@ -42,7 +42,13 @@ async function main(): Promise<void> {
 
     displayReport(report);
 
+    console.log(`\n📅 Reporting week: ${range.start.toDateString()} - ${range.end.toDateString()}`);
+    console.log(`\n📝 Report generated successfully!`);
+    console.log('writeToSheets:', writeToSheets);
+    console.log('SPREADSHEET_ID:', SPREADSHEET_ID);
+
     if (writeToSheets && SPREADSHEET_ID) {
+      console.log(`\n📊 Writing report to Google Sheets tab "${SCORECARD_TAB}" in spreadsheet ID "${SPREADSHEET_ID}"...`);
       const sheetsClient = createSheetsClient();
       const result = await updateScorecard(sheetsClient, SPREADSHEET_ID, SCORECARD_TAB, report);
       console.log(`\n📈 Scorecard updated: ${result.updatedLabels.length} metrics written to column ${result.weekColumn}.`);
