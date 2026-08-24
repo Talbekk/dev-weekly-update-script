@@ -109,6 +109,7 @@ export const mockStories: Story[] = [
     completed_at: "2026-05-05T16:00:00.000Z",
     created_at: "2026-04-28T09:00:00.000Z",
     updated_at: "2026-05-05T16:00:00.000Z",
+    external_links: [],
   },
   {
     id: 102,
@@ -122,6 +123,7 @@ export const mockStories: Story[] = [
     completed_at: "2026-05-06T10:00:00.000Z",
     created_at: "2026-04-29T09:00:00.000Z",
     updated_at: "2026-05-06T10:00:00.000Z",
+    external_links: [],
   },
   {
     id: 103,
@@ -135,6 +137,7 @@ export const mockStories: Story[] = [
     completed_at: "2026-05-07T13:00:00.000Z",
     created_at: "2026-05-06T09:00:00.000Z",
     updated_at: "2026-05-07T13:00:00.000Z",
+    external_links: [],
   },
   {
     id: 104,
@@ -148,6 +151,7 @@ export const mockStories: Story[] = [
     completed_at: "2026-05-07T17:00:00.000Z",
     created_at: "2026-04-20T09:00:00.000Z",
     updated_at: "2026-05-07T17:00:00.000Z",
+    external_links: [],
   },
   {
     id: 105,
@@ -161,6 +165,7 @@ export const mockStories: Story[] = [
     completed_at: "2026-05-08T09:00:00.000Z",
     created_at: "2026-04-22T09:00:00.000Z",
     updated_at: "2026-05-08T09:00:00.000Z",
+    external_links: [],
   },
   {
     id: 106,
@@ -174,6 +179,7 @@ export const mockStories: Story[] = [
     completed_at: "2026-05-08T11:00:00.000Z",
     created_at: "2026-05-07T14:00:00.000Z",
     updated_at: "2026-05-08T11:00:00.000Z",
+    external_links: [],
   },
 ];
 

@@ -178,6 +178,10 @@ export interface WeeklyReport {
     highPriority: number;
     support: number;
   };
+  choresCleared: {
+    storiesCompleted: number;
+    pointsCompleted: number;
+  };
 }
 
 export interface CustomField {

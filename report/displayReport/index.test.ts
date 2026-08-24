@@ -24,6 +24,11 @@ const report: WeeklyReport = {
     total: 3,
     highestPriority: 2,
     highPriority: 1,
+    support: 0,
+  },
+    choresCleared: {
+    storiesCompleted: 2,
+    pointsCompleted: 5,
   },
 };
 

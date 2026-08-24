@@ -21,6 +21,7 @@ const makeBug = (id: number, fieldId: string, value: string): Story => ({
   created_at: "2026-05-01T09:00:00.000Z",
   updated_at: "2026-05-01T09:00:00.000Z",
   custom_fields: [{ field_id: fieldId, value, value_id: "value-1" }],
+  external_links: [],
 });
 
 const mockBugs: Story[] = [
@@ -41,6 +42,7 @@ const aiStory: Story = {
   created_at: "2026-05-05T09:00:00.000Z",
   updated_at: "2026-05-09T10:00:00.000Z",
   custom_fields: [],
+  external_links: [],
 };
 
 const completedStories = [...mockStories, aiStory];

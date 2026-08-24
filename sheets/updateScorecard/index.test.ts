@@ -27,6 +27,10 @@ const report: WeeklyReport = {
     highPriority: 9,
     support: 0,
   },
+  choresCleared: {
+    storiesCompleted: 2,
+    pointsCompleted: 5,
+  },
 };
 
 // Mirrors the real scorecard: dates start at column E in row 2,

@@ -21,6 +21,8 @@ export const reportToMetrics = (report: WeeklyReport): Record<string, number> =>
   "Total Bugs - A": report.openBugs.highPriority,
   "Total Bugs (Support)": report.openBugs.support,
   "Active Epics": report.activeEpics.length,
+  "Chores Cleared": report.choresCleared.storiesCompleted,
+  "Chore Points Cleared": report.choresCleared.pointsCompleted,
 });
 
 // The scorecard labels each column with the *reporting* Monday: the column

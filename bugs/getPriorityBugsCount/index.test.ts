@@ -15,6 +15,7 @@ const makeBug = (fieldId: string, value: string): Story => ({
   created_at: "2026-05-01T09:00:00.000Z",
   updated_at: "2026-05-01T09:00:00.000Z",
   custom_fields: [{ field_id: fieldId, value, value_id: "value-1" }],
+  external_links: [],
 });
 
 describe("getPriorityBugsCount", () => {

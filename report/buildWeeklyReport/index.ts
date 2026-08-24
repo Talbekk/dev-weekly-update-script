@@ -12,6 +12,7 @@ import { getStoriesCompletedByAI } from "../../stories/getStoriesCompletedByAI";
 import { getEpicStoriesCompleted } from "../../epics/getEpicStoriesCompleted";
 import { getEpicPointsCompleted } from "../../epics/getEpicPointsCompleted";
 import { getPriorityBugsCount } from "../../bugs/getPriorityBugsCount";
+import { getChoresCleared } from "../../stories/getChoresCleared";
 
 const toEpicSummary = (epic: Epic): EpicSummary => ({
   id: epic.id,
@@ -58,5 +59,6 @@ export const buildWeeklyReport = async (client: ApiClient, range: DateRange): Pr
       highPriority: getPriorityBugsCount(bugsWithCustomFields, "High"),
       support: getSupportBugsCount(bugsWithCustomFields),
     },
+    choresCleared: getChoresCleared(completedStories),
   };
 };
