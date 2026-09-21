@@ -5,13 +5,10 @@ import { createApiClient } from "./api";
 import { getPreviousWeekRange } from "./helpers/getPreviousWeekDateRange";
 import { buildWeeklyReport } from "./report/buildWeeklyReport";
 import { displayReport } from "./report/displayReport";
-import { createSheetsClient } from "./sheets/createSheetsClient";
-import { updateScorecard } from "./sheets/updateScorecard";
 dotenv.config();
 
 const API_TOKEN = process.env.SHORTCUT_API_TOKEN;
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
-const SCORECARD_TAB = process.env.GOOGLE_SHEETS_TAB_NAME || "Dev";
 
 const writeToSheets = process.argv.includes("--sheets");
 
@@ -41,21 +38,6 @@ async function main(): Promise<void> {
     const report = await buildWeeklyReport(client, range);
 
     displayReport(report);
-
-    console.log(`\n📅 Reporting week: ${range.start.toDateString()} - ${range.end.toDateString()}`);
-    console.log(`\n📝 Report generated successfully!`);
-    console.log('writeToSheets:', writeToSheets);
-    console.log('SPREADSHEET_ID:', SPREADSHEET_ID);
-
-    if (writeToSheets && SPREADSHEET_ID) {
-      console.log(`\n📊 Writing report to Google Sheets tab "${SCORECARD_TAB}" in spreadsheet ID "${SPREADSHEET_ID}"...`);
-      const sheetsClient = createSheetsClient();
-      const result = await updateScorecard(sheetsClient, SPREADSHEET_ID, SCORECARD_TAB, report);
-      console.log(`\n📈 Scorecard updated: ${result.updatedLabels.length} metrics written to column ${result.weekColumn}.`);
-      if (result.missingLabels.length > 0) {
-        console.warn(`⚠️  Labels not found in the sheet: ${result.missingLabels.join(", ")}`);
-      }
-    }
 
     console.log("\n✅ Report generated successfully!\n");
   } catch (error) {
