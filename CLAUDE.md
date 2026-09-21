@@ -23,7 +23,7 @@ npx vitest run stories/fetchCompletedStories/index.test.ts
 
 ## Environment Setup
 
-Copy `.env.example` to `.env` and set `SHORTCUT_API_TOKEN`. The token is fetched from Shortcut account settings. Optional vars: `DAYS_BACK`, `PAGE_SIZE`, `WORKFLOW_STATE_IDS`.
+Copy `.env.example` to `.env` and set `SHORTCUT_API_TOKEN`. The token is fetched from Shortcut account settings. It is the only environment variable.
 
 ## Architecture
 

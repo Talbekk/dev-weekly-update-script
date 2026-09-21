@@ -24,6 +24,7 @@ const report: WeeklyReport = {
     total: 3,
     highestPriority: 2,
     highPriority: 1,
+    combinedPriority: 3,
     support: 0,
   },
     choresCleared: {
@@ -69,6 +70,7 @@ describe("displayReport", () => {
     expect(output).toContain("Total open bugs: 3");
     expect(output).toContain("Highest priority bugs: 2");
     expect(output).toContain("High priority bugs: 1");
+    expect(output).toContain("Combined priority bugs: 3");
   });
 
   it("prints AI story details", () => {

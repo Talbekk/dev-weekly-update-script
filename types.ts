@@ -1,9 +1,6 @@
 import type { AxiosInstance } from "axios";
-import type { sheets_v4 } from "googleapis";
 
 export type ApiClient = AxiosInstance;
-
-export type SheetsClient = sheets_v4.Sheets;
 
 export interface DateRange {
   start: Date;

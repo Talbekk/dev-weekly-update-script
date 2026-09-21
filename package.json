@@ -1,7 +1,7 @@
 {
   "name": "dev-weekly-update-script",
   "version": "1.0.0",
-  "description": "A script to get information from Shortcut and update a table in Google Sheets.",
+  "description": "A script to get weekly development metrics from Shortcut.",
   "main": "index.ts",
   "type": "module",
   "scripts": {
@@ -15,8 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.13.3",
-    "dotenv": "^17.2.3",
-    "googleapis": "^173.0.0"
+    "dotenv": "^17.2.3"
   },
   "devDependencies": {
     "@types/node": "^25.6.2",

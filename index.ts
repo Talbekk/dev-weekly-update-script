@@ -8,20 +8,12 @@ import { displayReport } from "./report/displayReport";
 dotenv.config();
 
 const API_TOKEN = process.env.SHORTCUT_API_TOKEN;
-const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
-
-const writeToSheets = process.argv.includes("--sheets");
 
 function validateConfig(): void {
   if (!API_TOKEN || API_TOKEN === "your_api_token_here") {
     console.error("❌ Error: SHORTCUT_API_TOKEN is not set or is using the default value.");
     console.error("Please create a .env file based on .env.example and add your Shortcut API token.");
     console.error("Get your token from: https://app.shortcut.com/settings/account/api-tokens");
-    process.exit(1);
-  }
-
-  if (writeToSheets && (!SPREADSHEET_ID || SPREADSHEET_ID === "your_spreadsheet_id_here")) {
-    console.error("❌ Error: --sheets requires GOOGLE_SHEETS_SPREADSHEET_ID to be set in .env.");
     process.exit(1);
   }
 }

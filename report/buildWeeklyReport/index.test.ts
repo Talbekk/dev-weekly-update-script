@@ -124,6 +124,8 @@ describe("buildWeeklyReport", () => {
       total: 3,
       highestPriority: 2,
       highPriority: 1,
+      combinedPriority: 3,
+      support: 0,
     });
   });
 
