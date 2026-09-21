@@ -176,6 +176,7 @@ export interface WeeklyReport {
     total: number;
     highestPriority: number;
     highPriority: number;
+    combinedPriority: number;
     support: number;
   };
   choresCleared: {

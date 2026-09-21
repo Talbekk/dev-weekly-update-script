@@ -38,6 +38,9 @@ export const buildWeeklyReport = async (client: ApiClient, range: DateRange): Pr
 
   const bugsWithCustomFields = bugs.filter((bug) => bug.custom_fields.length > 0);
   const epicStories = getEpicStoriesCompleted(completedStories);
+  const highestPriorityBugs = getPriorityBugsCount(bugsWithCustomFields, "Highest");
+  const highPriorityBugs = getPriorityBugsCount(bugsWithCustomFields, "High");
+  const combinedPriorityBugs = highestPriorityBugs + highPriorityBugs;
 
   return {
     range: {
@@ -55,8 +58,9 @@ export const buildWeeklyReport = async (client: ApiClient, range: DateRange): Pr
     completedEpics: completedEpics.map(toEpicSummary),
     openBugs: {
       total: bugs.length,
-      highestPriority: getPriorityBugsCount(bugsWithCustomFields, "Highest"),
-      highPriority: getPriorityBugsCount(bugsWithCustomFields, "High"),
+      highestPriority: highestPriorityBugs,
+      highPriority: highPriorityBugs,
+      combinedPriority: combinedPriorityBugs,
       support: getSupportBugsCount(bugsWithCustomFields),
     },
     choresCleared: getChoresCleared(completedStories),
